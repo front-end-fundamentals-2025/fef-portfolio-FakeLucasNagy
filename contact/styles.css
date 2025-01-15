@@ -6,7 +6,7 @@ body {
     background-color: #011313;
 }
 main {
-    min-height: 63vh;
+    min-height: calc(100vh - 21rem);
     padding-top: 2rem;
     padding-bottom: 2rem;
     display: flex;
