@@ -42,17 +42,20 @@ main {
     .title {
         padding-bottom: 10vw;
     }
+    main {
+        min-height: calc(100vh - 77vw);
+    }
     .contact-box {
         width: 90vw;
-        height: auto;
+        height: 115vw;
         grid-template-columns: 70vw;
         text-align: center;
         padding: 0;
     }
     .contact-box>a {
-        margin: 1rem 0;
-        font-size: 2.8rem;
-        line-height: 3rem;
+        margin: 3vw 0;
+        font-size: 7vw;
+        line-height: 7vw;
         background-color: rgba(255, 255, 255, 0.037);;
     }
 }
