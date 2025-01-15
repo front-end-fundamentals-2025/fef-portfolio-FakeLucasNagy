@@ -10,7 +10,7 @@ Very cool information 'bout me
 Yes
 ## Am I sure?
 Yes
-## Will you steal my information
+## Will I steal your information
 Yes
 ## Where do I sign?
 At the dotted line
