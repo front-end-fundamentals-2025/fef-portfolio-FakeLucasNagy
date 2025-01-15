@@ -12,6 +12,6 @@ Yes
 Yes
 ## Will I steal your information
 Yes
-## Where do I sign?
+## Where do you sign?
 At the dotted line
 ### Signature: ...............................................
