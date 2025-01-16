@@ -35,6 +35,16 @@ body {
     top: 0;
     left: 0;
 }
+.scroll-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 140vh;
+    top: 0;
+    font-weight: 600;
+}
 .social {
     position: sticky;
     font-size: 1.8rem;
