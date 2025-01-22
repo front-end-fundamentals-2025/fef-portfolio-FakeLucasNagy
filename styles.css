@@ -176,7 +176,9 @@ body {
     .lucas-container>#lucas {
         width: 50%;
     }
-
+    .text {
+        padding:10vw;
+    }
     .text>h1 {
         font-size: 25vw;
     }
@@ -191,7 +193,7 @@ body {
     }
     
     .profile-pic-container>img {
-        height: 42rem;
+        height: 100vw;
     }
 
     .profile-info {
