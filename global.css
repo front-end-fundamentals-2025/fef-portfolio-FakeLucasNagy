@@ -35,6 +35,24 @@ h1 {
     z-index: 999;
 }
 
+.home {
+    padding: 3.5rem 4.5rem 3.5rem 4.5rem;
+    background-color: rgba(255, 228, 196, 0);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 1.7rem;
+    font-weight: 600;
+    word-spacing: 2.2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.home>a>svg {
+    fill: rgb(255, 255, 255);
+    width: 1.7rem;
+}
+
 #mail {
     color: #3e4545;
 }
