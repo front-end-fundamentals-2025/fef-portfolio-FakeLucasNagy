@@ -18,7 +18,7 @@ main {
     padding: 2rem;
     width: 58rem;
     height: 18rem;
-    background-color: #162222;;
+    background-color: #162222;
     display: grid;
     grid-template-columns: 22rem 22rem;
     justify-content: center;
@@ -39,7 +39,7 @@ main {
     justify-self: center;
     border-radius: 0.5rem;
     width: 46rem;
-    background-color: #162222;;
+    background-color: #162222;
     font-size: 2rem;
     font-weight: 400;
     color: #ffffff;

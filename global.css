@@ -60,17 +60,16 @@ h1 {
     transform: none;
 }
 
-a,a:visited {
+.link,.link:visited {
     color: rgb(255, 255, 255);
     text-decoration: none;
     display: inline-block;
 }
-a:hover {
+.link:hover {
     transform: scale(0.9);
     transition: 0.0001s;
     color: hsl(0, 0%, 85%);
 }
-
 
 footer {
     background-color: rgb(2, 10, 10);
