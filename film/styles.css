@@ -22,5 +22,10 @@ iframe {
 @media (min-width: 320px) and (max-width: 1220px) {
     .grid {
         grid-template-columns: 1fr;
+        gap: 4vw;
+    }
+    iframe {
+        width: 90vw;
+        height: 50vw;
     }
 }
