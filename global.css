@@ -105,6 +105,7 @@ footer span {
     animation-duration: 10s;
     animation-timing-function: linear;
     animation-delay: 2s;
+    animation-iteration-count: infinite;
 }
 
 @media (min-width: 320px) and (max-width: 999px) {
