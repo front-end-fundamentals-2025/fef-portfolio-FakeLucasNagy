@@ -2,7 +2,7 @@ body {
     background-color: #011313;
     box-sizing: border-box;
     position: relative;
-    color: rgb(255, 255, 255);
+    color: #ede9d4;
     text-decoration: none;
     font-size: 1.3rem;
     font-weight: 400;
@@ -189,7 +189,6 @@ body {
     .profile-pic-container {
         width: 80vw;
         height: 80vw;
-        background-color: red;
     }
     
     .profile-pic-container>img {
