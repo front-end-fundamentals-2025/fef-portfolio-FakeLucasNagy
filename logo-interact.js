@@ -1,5 +1,4 @@
 const logoElement = document.getElementById("lucas");
-const imgElement = document.getElementsByTagName("img");
 const newImg = document.createElement("img");
 const logoParent = document.getElementById("lucas-container");
 
