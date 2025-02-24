@@ -21,11 +21,14 @@ body {
     object-fit: cover;
     z-index: -999;
 }
-.lucas-container>#lucas {
-    width: 25%;
+#lucas-container>#lucas {
+    height: 35%;
     z-index: 999;
+    opacity: 0;
+    
+    animation: fade-in 1s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
 }
-.lucas-container {
+#lucas-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,8 +176,8 @@ body {
         bottom: 2rem;
     }
 
-    .lucas-container>#lucas {
-        width: 50%;
+    #lucas-container>#lucas {
+        height: 15%;
     }
     .text {
         padding:10vw;
