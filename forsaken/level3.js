@@ -364,6 +364,13 @@ export function makeLevel3(setScene) {
             }
 
 
+            for (let zombie of this.zombies) {
+                if (this.zombies.length < 4 && dist(this.player.x, this.player.y, zombie.x, zombie.y) > 100) {
+                    bossFinder = new BossFinder( zombie, this.player );
+                }
+            }
+
+
         },
 
         draw(currentScene) {
@@ -401,11 +408,17 @@ export function makeLevel3(setScene) {
                 }
             }
 
-            this.ui.draw(this.player, this.gun, this.zombies);
-            this.minimap.draw();
+            this.ui.draw(this.player, this.gun, this.zombies, this.boss, this.bossFight);
+            this.minimap.mini3();
 
             for (let bos of this.boss) {
                 if (bossFinder !== null && dist(bos.x, bos.y, this.player.x, this.player.y) > 100) {
+                    bossFinder.draw();
+                }
+            }
+
+            for (let zombie of this.zombies) {
+                if (this.zombies.length < 6 && dist(zombie.x, zombie.y, this.player.x, this.player.y) > 100) {
                     bossFinder.draw();
                 }
             }

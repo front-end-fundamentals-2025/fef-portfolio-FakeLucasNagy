@@ -5,8 +5,20 @@ export default class UI {
     }
     setup(player) {
     }
-    draw(player, gun, zombies) {
-        ammoUI(gun);
+    load() {
+        this.gunActive = loadImage("./assets/gunactive.png");
+        this.gunInactive = loadImage("./assets/guninactive.png");
+        this.rifleActive = loadImage("./assets/rifleactive.png");
+        this.rifleInactive = loadImage("./assets/rifleinactive.png");
+    }
+    draw(player, gun, rifle, zombies, boss, bossFight) {
+
+        if (gun.active) {
+            ammoUI(gun);
+        } if (rifle.active) {
+            ammoUI(rifle);
+        }
+
         healthBar(this.maxHP, player);
         if (player.shield > 0) {
             shieldBar(this.maxShield, player);
@@ -24,10 +36,27 @@ export default class UI {
             text(zombies.length + " ZOMBIES LEFT!", 192/2, 108-5);
             pop();
         }
+
+        if (bossFight) {
+            for (let bos of boss) {
+                bossBar(this.maxHP, bos);
+            }1
+        }
+
+        if (rifle.active) {
+            weaponSlot1(this.rifleActive);
+            weaponSlot2(this.gunInactive);
+        } else {
+            weaponSlot1(this.rifleInactive);
+            weaponSlot2(this.gunActive);
+        } 
+
+
     }
 }
 
-function healthBar(maxHP, player) {
+function healthBar(maxHP, bos) {
+
     push();
     // background
     stroke(50, 0, 0); 
@@ -35,11 +64,11 @@ function healthBar(maxHP, player) {
     rect(3, 3, maxHP / 1.8, 5);
     // bar
     fill(255, 0, 0);
-    rect(3, 3, player.hp / 1.8, 5);
+    rect(3, 3, bos.hp / 1.8, 5);
     // text
     textSize(5);
     strokeWeight(1.8);
-    text(player.hp, 61, 7.3);
+    text(bos.hp, 61, 7.3);
     pop();
 }
 
@@ -73,4 +102,29 @@ function ammoUI(gun) {
     text(gun.ammoCount, 172, 100);
 
     pop();
+}
+
+function bossBar(maxHP, player) {
+    push();
+    translate(63, 97);
+    // background
+    stroke(32, 0, 50); 
+    fill(32, 0, 50);
+    rect(3, 3, maxHP / 1.8, 5);
+    // bar
+    fill(142, 0, 222);
+    rect(3, 3, player.hp / 1.8, 5);
+    // text
+    textSize(3);
+    strokeWeight(1.2);
+    textAlign(CENTER);
+    text('Zombie Boss', 31, 7.3);
+    pop();
+}
+
+function weaponSlot1(weapon) {
+    image(weapon, 175, 85, 18, 8);
+}
+function weaponSlot2(weapon) {
+    image(weapon, 175, 75, 18, 8);
 }

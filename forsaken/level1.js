@@ -1,8 +1,14 @@
 import LoseScreen from "./loseScreen.js";
 
+import Minimap from "./minimap.js";
+import BossFinder from "./bossFinder.js";
+
 import Camera from "./entities/camera.js";
 import Player from "./entities/player.js";
+
 import Gun from "./entities/gun.js";
+import Rifle from "./entities/rifle.js";
+
 import Zombie from "./entities/zombie.js";
 import DamageParticle from "./entities/particleDamage.js";
 
@@ -16,10 +22,18 @@ let particles = [];
 
 export function makeLevel1(setScene) {
     const loseScreen = new LoseScreen();
+
+    const minimap = new Minimap();
+
     const camera = new Camera(0, 0);
     const player = new Player(0, 0);
+
     const gun = new Gun(0, 0);
+    const rifle = new Rifle(0, 0);
+
+
     const zombies = [];
+    let bossFinder = null;
 
     const bullets = [];
     const bandages = [];
@@ -29,9 +43,15 @@ export function makeLevel1(setScene) {
     const ui = new UI();
     return {
         loseScreen: loseScreen,
+
+        minimap: minimap,
+
         camera: camera,
         player: player,
+        
         gun: gun,
+        rifle: rifle,
+
         zombies: zombies,
 
         bullets: bullets,
@@ -43,8 +63,11 @@ export function makeLevel1(setScene) {
         load() {
             this.map.load();
             this.gun.load();
+            this.rifle.load();
             this.player.load();
             this.loseScreen.load();
+            this.minimap.load();
+            this.ui.load();
         },
         setup() {
 
@@ -52,8 +75,11 @@ export function makeLevel1(setScene) {
             this.player.shield = 0;
             this.player.x = 0;
             this.player.y = 0;
+
             this.gun.magCount = 1;
             this.gun.ammoCount = 20;
+            this.rifle.magCount = 2;
+            this.rifle.ammoCount = 30;
 
             this.zombies = [];
             this.bandages = [];
@@ -62,6 +88,7 @@ export function makeLevel1(setScene) {
             this.map.setup();
             this.player.setup();
             this.gun.setup();
+            this.rifle.setup();
             this.camera.attachTo(this.player);
 
            
@@ -108,10 +135,12 @@ export function makeLevel1(setScene) {
         },
 
         update(level2, savedVars) {
-            this.player.update(this.map.tiles1, this.gun);
+            this.player.update(this.map.tiles1, this.gun, this.rifle);
             this.gun.update(this.bullets, this.player);
+            this.rifle.update(this.bullets, this.player);
             this.camera.update();
             this.loseScreen.update(this.player);
+            this.minimap.update(this.player);
 
             for (let bandage of this.bandages) {
                 bandage.update();
@@ -132,7 +161,7 @@ export function makeLevel1(setScene) {
             }
             for (let ammoBox of this.ammoBoxes) {
                 ammoBox.update();
-                ammoBox.collisionWith(this.player, this.gun, this.ammoBoxes, this.ui);
+                ammoBox.collisionWith(this.player, this.gun, this.rifle, this.ammoBoxes, this.ui);
             }
 
             for (let zombie of this.zombies) {
@@ -252,11 +281,29 @@ export function makeLevel1(setScene) {
                     savedVars.shield = this.player.shield;
                     savedVars.magCount = this.gun. magCount;
                     savedVars.ammoCount = this.gun.ammoCount;
+                    savedVars.rifleMagCount = this.rifle. magCount;
+                    savedVars.rifleAmmoCount = this.rifle.ammoCount;
 
                     level2.setup(savedVars); 
                     console.log('saved');
                     setScene("level2");
                 }
+            }
+
+            for (let zombie of this.zombies) {
+                if (this.zombies.length < 4 && dist(this.player.x, this.player.y, zombie.x, zombie.y) > 100) {
+                    bossFinder = new BossFinder( zombie, this.player );
+                }
+            }
+
+
+            //switch weapon
+            if (keyIsDown(49)) {
+                this.gun.active = true;
+                this.rifle.active = false;
+            } if (keyIsDown(50)) {
+                this.gun.active = false;
+                this.rifle.active = true;
             }
         },
 
@@ -270,7 +317,13 @@ export function makeLevel1(setScene) {
                 ammoBox.draw(this.camera);
             }
             this.player.draw(this.camera);
-            this.gun.draw(this.camera);
+
+            if (this.gun.active) {
+                this.gun.draw(this.camera);
+            } if (this.rifle.active) {
+                this.rifle.draw(this.camera);
+            }
+
             for (let bullet of this.bullets) {
                 bullet.draw(this.camera, this.zombies);
             }
@@ -288,7 +341,14 @@ export function makeLevel1(setScene) {
                 }
             }
 
-            this.ui.draw(this.player, this.gun, this.zombies);
+            this.ui.draw(this.player, this.gun, this.rifle, this.zombies);
+            this.minimap.mini1();
+
+            for (let zombie of this.zombies) {
+                if (this.zombies.length < 4 && dist(zombie.x, zombie.y, this.player.x, this.player.y) > 100) {
+                    bossFinder.draw();
+                }
+            }
 
             if (this.player.hp === 0) {
                 this.loseScreen.draw(currentScene);

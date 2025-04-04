@@ -116,7 +116,7 @@ export default class Player extends Entity {
         this.setAnim("idle");
     }
 
-    update(map, gun) {
+    update(map, gun, rifle) {
         //prev timer
         this.animationTimer += deltaTime; // make timer
 
@@ -127,6 +127,7 @@ export default class Player extends Entity {
         this.currentFrameData = this.setAnimFrame(animData);
 
         this.damageFlash(gun);
+        this.damageFlash(rifle);
     }
 
     draw(camera) {

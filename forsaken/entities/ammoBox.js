@@ -55,9 +55,13 @@ export default class Ammo extends Entity {
         );
     }
 
-    collisionWith(player, gun, ammoBoxes, ui) {
-        if (dist(player.x, player.y, this.x, this.y) < this.width && gun.magCount !== gun.maxMag) {
+    collisionWith(player, gun, rifle, ammoBoxes, ui) {
+        if (dist(player.x, player.y, this.x, this.y) < this.width && gun.magCount !== gun.maxMag && gun.active) {
             gun.magCount += 1;
+            ammoBoxes.splice(ammoBoxes.indexOf(this), 1);
+        }
+        if (dist(player.x, player.y, this.x, this.y) < this.width && rifle.magCount !== rifle.maxMag && rifle.active) {
+            rifle.magCount += 1;
             ammoBoxes.splice(ammoBoxes.indexOf(this), 1);
         }
     }

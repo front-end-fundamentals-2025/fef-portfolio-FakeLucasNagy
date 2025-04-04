@@ -7,7 +7,9 @@ let savedVars = {
     hp: 100,
     shield: 0,
     magCount: 1,
-    ammoCount: 20
+    ammoCount: 20,
+    rifleMagCount: 2,
+    rifleAmmoCount: 30
 }
 
 

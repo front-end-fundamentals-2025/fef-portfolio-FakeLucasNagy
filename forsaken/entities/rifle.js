@@ -6,7 +6,7 @@ export default class Gun extends Entity {
     constructor(x, y) {
         super();
 
-        this.active = true;
+        this.active = false;
 
         this.speed = 100; // player speed
         this.x = x;
@@ -20,19 +20,18 @@ export default class Gun extends Entity {
         this.spriteR = 0;
         this.spriteRSmooth = 0;
 
-        this.magCount = 3;
-        this.ammoCount = 16; 
-        this.maxAmmo = 16;
-        this.maxMag = 6;
+        this.magCount = 4;
+        this.ammoCount = 24; 
+        this.maxAmmo = 24;
+        this.maxMag = 10;
         this.reloading = false;
 
         this.tint = 255;
 
         this.buttonPress = false;
-        this.prevPress = false; // nånting skott sjuktit tryuckt kanpp
     }
     load() {
-        this.spriteRef = loadImage("./assets/gun.png");
+        this.spriteRef = loadImage("./assets/rifle.png");
     }
 
     loadAnim() {
@@ -41,8 +40,8 @@ export default class Gun extends Entity {
         this.anims = {
             "idle": 0,
             "run": { from: 1, to: 2, loop: true, speed: 7 },
-            "shoot": { from: 3, to: 5, loop: false, speed: 8 },
-            "reload": { from: 6, to: 8, loop: false, speed: 2 },
+            "shoot": { from: 3, to: 5, loop: false, speed: 14 },
+            "reload": { from: 6, to: 8, loop: false, speed: 1 },
         };
     }
 
@@ -98,14 +97,13 @@ export default class Gun extends Entity {
         this.buttonPress = keyIsDown(82);
 
         // shoot
-        if (mouseIsPressed && !this.prevPress && !this.reloading && this.currentAnim != "shoot" && player.hp !== 0 && this.active) { // click function
+        if (mouseIsPressed && !this.reloading && this.currentAnim != "shoot" && player.hp !== 0 && this.active) { // click function
             if (this.ammoCount > 0) { // only shoot if has ammo
                 this.setAnim("shoot");
                 bullets.push(new Bullet(player.x, player.y, (this.spriteR) - radians(90)));
                 this.ammoCount -= 1;
             }
         }
-        this.prevPress = mouseIsPressed;
 
         const moveBy = (this.speed / 1000) * deltaTime;
         this.movePlayer(moveBy);
